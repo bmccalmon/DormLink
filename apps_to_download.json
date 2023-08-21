@@ -1,0 +1,20 @@
+[
+    {
+        "name": "Footy",
+	"author": "benmccalmon",
+	"description": "Displays the current and notable upcoming soccer fixtures.",
+        "download_link": "https://github.com/bmccalmon/Footy.git"
+    },
+    {
+        "name": "App2",
+	"author": "benmccalmon",
+	"description": "A description.",
+        "download_link": "https://example.com/app2"
+    },
+    {
+        "name": "App3",
+	"author": "benmccalmon",
+	"description": "A description.",
+        "download_link": "https://example.com/app3"
+    }
+]
