@@ -14,11 +14,12 @@ Any project within the 'Apps' folder will be checked for updates.
 
 apps_directory = "Apps"
 
+#n_updates = 0
 def update_repo(repository_path):
     """
     Given a specific repo, this updates it if it isn't already up-to-date.
     """
-    nonlocal n_updates
+    #nonlocal n_updates
 
     print(f"### Updating {repository_path} ###")
 
@@ -33,18 +34,17 @@ def update_repo(repository_path):
     if local_commit_hash != remote_commit_hash:
         print("Update found! Updating...")
         repo.remotes.origin.pull()
-        n_updates += 1
+        #n_updates += 1
 
     print(f"{repository_path} is up-to-date.")
 
-n_updates = 0
 def update_apps():
     """
     This updates DormLink and ALL of the installed apps if they aren't already up-to-date.
     Returns the number of apps updated.
     """
-    nonlocal n_updates
-    n_updates = 0
+    #nonlocal n_updates
+    #n_updates = 0
 
     # Update the main DormLink repository
     update_main_repository = True
@@ -57,10 +57,10 @@ def update_apps():
         if os.path.isdir(app_path):
             update_repo(app_path)
 
-    if n_updates > 0:
-        print(f"Updated {n_updates} apps.")
+    #if n_updates > 0:
+    #    print(f"Updated {n_updates} apps.")
 
-    return n_updates
+    #return n_updates
 
 def main():
     update_apps()
