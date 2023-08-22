@@ -48,7 +48,7 @@ def main():
         app_button_list.append(button)
 
     settings = tk.Button(app_list_frame, text="Settings", bg="white", relief="flat", command=toggle_settings)
-    check_for_updates = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", command="fullscreen")
+    check_for_updates = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", command=button_pressed)
 
     # Lay them out
     app_list_frame.grid(row=0, column=0, sticky="snew") # sticky="snew"
