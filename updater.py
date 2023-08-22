@@ -27,6 +27,7 @@ def update_repo(repository_path):
 
     if local_commit_hash != remote_commit_hash:
         print("Update found! Updating...")
+        repo.remotes.origin.pull()
 
     print(f"{repository_path} is up-to-date.")
 

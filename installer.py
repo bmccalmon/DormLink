@@ -1,11 +1,18 @@
 #!/usr/bin/env python3
 
+import sys
+sys.path.append("Dependencies")
+
+import os
+import git
 import json
 
 """
 This is the installer for applications.
 Provided a remote repository URL, the installer will clone the repository to the "Apps" folder.
 """
+
+apps_directory = "Apps"
 
 def get_apps_to_download():
     """
@@ -15,8 +22,13 @@ def get_apps_to_download():
         apps_data = json.load(json_file)
     return apps_data
 
+def download_app(repository_url):
+    print(f"Downloading from {repository_url}...")
+    git.Repo.clone_from(repository_url, apps_directory)
+
 def main():
-    print(str(get_apps_to_download()))
+    apps = get_apps_to_download()
+    download_app(apps[0]["download_link"])
 
 if __name__ == "__main__":
     main()
