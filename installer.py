@@ -25,7 +25,7 @@ def get_apps_to_download():
 def download_app(repository_url):
     print(f"Downloading from {repository_url}...")
     
-    app_name = repository_url.splot('/')[-1].replace('.git', '')
+    app_name = repository_url.split('/')[-1].replace('.git', '')
     git.Repo.clone_from(repository_url, os.path.join(apps_directory, app_name))
 
 def main():
