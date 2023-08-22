@@ -7,15 +7,8 @@ apps_directory = "Apps"
 
 def main():
     root = tk.Tk()
-    #root.attributes("-fullscreen", True)
+    root.attributes("-fullscreen", True)
     
-    # Get the screen width
-    screen_width = root.winfo_screenwidth()
-
-    # Set the window size to match the screen width and disable resizing
-    root.geometry(f"{screen_width}x{root.winfo_screenheight()}")
-    root.resizable(False, False)
-
     settings_shown = False
 
     def toggle_settings():
