@@ -7,7 +7,7 @@ apps_directory = "Apps"
 
 def main():
     root = tk.Tk()
-    root.attributes("-fullscreen", True)
+    #root.attributes("-fullscreen", True)
     
     settings_shown = False
 
@@ -24,8 +24,9 @@ def main():
             root.columnconfigure(1, weight=0)
             settings_shown = False
 
-    def button_pressed(info):
+    def button_pressed():
         print("Button pressed")
+        root.attributes("-fullscreen", True)
 
     # Create grid layout with two columns
     root.grid_rowconfigure(0, weight=1)
@@ -43,11 +44,11 @@ def main():
         icon_list.append(icon)
         #button = tk.Button(app_list_frame, image=icon, bg="white", relief="flat", command=lambda app=app: print(f"{app} clicked")) # in each app folder, there is an icon.png
         button = tk.Label(app_list_frame, image=icon)
-        button.bind("<Button-1>", button_pressed)
+        #button.bind("<Button-1>", button_pressed)
         app_button_list.append(button)
 
     settings = tk.Button(app_list_frame, text="Settings", bg="white", relief="flat", command=toggle_settings)
-    check_for_updates = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat")
+    check_for_updates = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", command="fullscreen")
 
     # Lay them out
     app_list_frame.grid(row=0, column=0, sticky="snew") # sticky="snew"
