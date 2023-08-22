@@ -23,6 +23,9 @@ def get_apps_to_download():
     return apps_data
 
 def download_app(repository_url):
+    """
+    Given a repo URL, installs an app in the "Apps" folder
+    """
     print(f"Downloading from {repository_url}...")
     
     app_name = repository_url.split('/')[-1].replace('.git', '')
