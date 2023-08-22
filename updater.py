@@ -44,6 +44,7 @@ def update_apps():
     Returns the number of apps updated.
     """
     nonlocal n_updates
+    n_updates = 0
 
     # Update the main DormLink repository
     update_main_repository = True
