@@ -52,9 +52,12 @@ def main():
     settings.pack(side="left", padx=20, pady=20, fill="x", expand=True)
     check_for_updates.pack(expand=True)
 
-    root.mainloop()
+    def set_fullscreen():
+        root.attributes("-fullscreen", True)
 
-    root.attributes("-fullscreen", True)
+    root.after(100, set_fullscreen)
+
+    root.mainloop()
 
 if __name__ == "__main__":
     main()
