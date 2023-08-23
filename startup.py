@@ -19,7 +19,7 @@ def updated_popup(root, n_updates):
         popup_text = "You are already up-to-date."
     popup_label = tk.Label(popup, text=popup_text)
     popup_label.pack()
-    def set_fullscreen()
+    def set_fullscreen():
         popup.attributes("-fullscreen", True)
 
     popup.after(100, set_fullscreen)
