@@ -23,10 +23,10 @@ def updated_popup(root, n_updates):
     popup_message = tk.Label(popup, text=popup_text, font=("Arial", text_size))
     
     def close_popup():
-        popup.pack_forget()
+        popup.destroy()
 
     # Create exit button
-    popup_exit = tk.Button(popup, text="Close", command=close_popup)
+    popup_exit = tk.Button(popup, text="Close", bg="white", relief="flat", command=close_popup)
 
     # Lay everything out
     popup_header.pack()
