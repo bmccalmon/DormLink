@@ -14,10 +14,10 @@ Any project within the 'Apps' folder will be checked for updates.
 
 apps_directory = "Apps"
 
-#n_updates = 0
 def update_repo(repository_path):
     """
     Given a specific repo, this updates it if it isn't already up-to-date.
+    Returns True if there was an update found, False otherwise
     """
     #nonlocal n_updates
 
@@ -31,12 +31,14 @@ def update_repo(repository_path):
     remote_commit_hash = remote_branch.commit.hexsha
     local_commit_hash = current_branch.commit.hexsha
 
+    update_found = False
     if local_commit_hash != remote_commit_hash:
+        update_found = True
         print("Update found! Updating...")
         repo.remotes.origin.pull()
-        #n_updates += 1
 
     print(f"{repository_path} is up-to-date.")
+    return update_found
 
 def update_apps():
     """
@@ -51,16 +53,17 @@ def update_apps():
     if update_main_repository:
         update_repo('.')
 
+    n_updates = 0
     # Update the installed apps
     for app in os.listdir(apps_directory):
         app_path = os.path.join(apps_directory, app)
         if os.path.isdir(app_path):
-            update_repo(app_path)
+            if update_repo(app_path) == True:
+                n_updates += 1
 
-    #if n_updates > 0:
-    #    print(f"Updated {n_updates} apps.")
+    print(f"{n_updates} apps updated.")
 
-    #return n_updates
+    return n_updates
 
 def main():
     update_apps()

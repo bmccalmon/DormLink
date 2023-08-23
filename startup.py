@@ -3,9 +3,22 @@ import os
 import tkinter as tk
 from tkinter import Menu, messagebox
 
+import updater
+
 apps_directory = "Apps"
 header_size = 30
 text_size = 21
+
+def updated_popup(root, n_updates):
+    popup = tk.TopLevel(root)
+    popup.title("Updater")
+    popup_text = ""
+    if n_updates > 0:
+        popup_text = f"{n_updates} apps were updated. Restart to make changes."
+    else:
+        popup_text = "You are already up-to-date."
+    popup_label = tk.Label(popup, text=popup_text)
+    popup_label.pack()
 
 def main():
     root = tk.Tk()
@@ -46,7 +59,7 @@ def main():
 
     # Settings buttons
     settings_button = tk.Button(settings_frame, text="", bg="#d6d6d6", relief="flat", borderwidth=0, command=toggle_settings)
-    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size))
+    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root, updater.update_apps()))
 
     # Create labels
     settings_label = tk.Label(settings_frame, text="Settings", font=("Arial", header_size))
