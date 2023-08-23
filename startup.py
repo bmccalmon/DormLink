@@ -10,7 +10,7 @@ header_size = 30
 text_size = 21
 
 def updated_popup(root, n_updates):
-    popup = tk.TopLevel(root)
+    popup = tk.Toplevel(root)
     popup.title("Updater")
     popup_text = ""
     if n_updates > 0:
