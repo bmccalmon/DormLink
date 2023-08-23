@@ -45,15 +45,12 @@ def update_apps():
     This updates DormLink and ALL of the installed apps if they aren't already up-to-date.
     Returns the number of apps updated.
     """
-    #nonlocal n_updates
-    #n_updates = 0
 
     # Update the main DormLink repository
-    update_main_repository = True
-    if update_main_repository:
-        update_repo('.')
-
     n_updates = 0
+    if update_repo('.') == True:
+        n_updates += 1
+
     # Update the installed apps
     for app in os.listdir(apps_directory):
         app_path = os.path.join(apps_directory, app)
