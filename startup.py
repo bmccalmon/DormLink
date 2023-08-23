@@ -86,7 +86,7 @@ def main():
 
     # Settings buttons
     settings_button = tk.Button(settings_frame, text="", bg="#d6d6d6", relief="flat", borderwidth=0, command=toggle_settings)
-    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root)
+    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root))
 
     # Create labels
     settings_label = tk.Label(settings_frame, text="Settings", font=("Arial", header_size))
