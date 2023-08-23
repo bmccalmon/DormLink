@@ -29,9 +29,9 @@ def updated_popup(root, n_updates):
     popup_exit = tk.Button(popup, text="Close", bg="white", relief="flat", command=close_popup)
 
     # Lay everything out
-    popup_header.pack()
-    popup_message.pack()
-    popup_exit.pack()
+    popup_header.pack(pady=20)
+    popup_message.pack(pady=20)
+    popup_exit.pack(pady=20)
 
     def set_fullscreen():
         popup.attributes("-fullscreen", True)
