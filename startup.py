@@ -11,14 +11,28 @@ text_size = 21
 
 def updated_popup(root, n_updates):
     popup = tk.Toplevel(root)
-    popup.title("Updater")
-    popup_text = ""
+    
+    # Header
+    popup_header = tk.Label(popup, text="Updater", font=("Arial", header_size))
+
+    # Construct message
     if n_updates > 0:
         popup_text = f"{n_updates} apps were updated. Restart to make changes."
     else:
         popup_text = "You are already up-to-date."
-    popup_label = tk.Label(popup, text=popup_text)
-    popup_label.pack()
+    popup_message = tk.Label(popup, text=popup_text, font=("Arial", text_size))
+    
+    def close_popup():
+        popup.pack_forget()
+
+    # Create exit button
+    popup_exit = tk.Button(popup, text="Close", command=close_popup)
+
+    # Lay everything out
+    popup_header.pack()
+    popup_message.pack()
+    popup_exit.pack()
+
     def set_fullscreen():
         popup.attributes("-fullscreen", True)
 
