@@ -33,7 +33,7 @@ def updated_popup(root):
         popup.destroy()
 
     # Create exit button
-    popup_exit = tk.Button(popup, text="Close", bg="white", relief="flat", command=close_popup)
+    popup_exit = tk.Button(popup, text="Close", bg="white", font=("Arial", text_size), relief="flat", command=close_popup)
     if n_updates > 0:
         popup_exit.config(text="Restart", command=restart_script)
 
