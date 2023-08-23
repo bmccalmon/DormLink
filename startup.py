@@ -2,6 +2,7 @@
 import os
 import tkinter as tk
 from tkinter import Menu, messagebox
+import sys
 
 import updater
 
@@ -9,29 +10,37 @@ apps_directory = "Apps"
 header_size = 30
 text_size = 21
 
-def updated_popup(root, n_updates):
+def restart_script():
+    python = sys.executable
+    os.execl(python, python, *sys.argv)
+
+def updated_popup(root):
     popup = tk.Toplevel(root)
     
     # Header
     popup_header = tk.Label(popup, text="Updater", font=("Arial", header_size))
+    
+    # Update and show progress message
+    popup_message = tk.Label(popup, text="Updating you applications...", font=("Arial", text_size))
+    n_updates = updater.update_apps()
 
     # Construct message
+    popup_message.config(text="You are already up-to-date.")
     if n_updates > 0:
-        popup_text = f"{n_updates} apps were updated. Restart to make changes."
-    else:
-        popup_text = "You are already up-to-date."
-    popup_message = tk.Label(popup, text=popup_text, font=("Arial", text_size))
+        popup_message.config(text=f"{n_updates} apps were updated. Restart to make changes.")
     
     def close_popup():
         popup.destroy()
 
     # Create exit button
     popup_exit = tk.Button(popup, text="Close", bg="white", relief="flat", command=close_popup)
+    if n_updates > 0:
+        popup_exit.config(text="Restart", command=restart_script)
 
     # Lay everything out
-    popup_header.pack(pady=10, side="left")
-    popup_message.pack(pady=10, side="left")
-    popup_exit.pack(pady=10, side="left")
+    popup_header.pack(expand=True)
+    popup_message.pack(expand=True)
+    popup_exit.pack(expand=True)
 
     def set_fullscreen():
         popup.attributes("-fullscreen", True)
@@ -77,7 +86,7 @@ def main():
 
     # Settings buttons
     settings_button = tk.Button(settings_frame, text="", bg="#d6d6d6", relief="flat", borderwidth=0, command=toggle_settings)
-    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root, updater.update_apps()))
+    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root)
 
     # Create labels
     settings_label = tk.Label(settings_frame, text="Settings", font=("Arial", header_size))
