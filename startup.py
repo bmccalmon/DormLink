@@ -3,6 +3,7 @@ import os
 import tkinter as tk
 from tkinter import Menu, messagebox
 import sys
+import subprocess
 
 import updater
 
@@ -14,9 +15,17 @@ def restart_script():
     python = sys.executable
     os.execl(python, python, *sys.argv)
 
-def updated_popup(root):
+def open_app(app_name):
+    script_path = f"{apps_directory}/{app_name}/startup.py"
+    try:
+        print(f"Running the script: {script_path}")
+        subprocess.run(["python3", script_path])
+    except subprocess.CalledProcessError as e:
+        print(f"Error running the script: {e}")
+
+def updater_popup(root):
     popup = tk.Toplevel(root)
-    
+
     # Header
     popup_header = tk.Label(popup, text="Updater", font=("Arial", header_size))
     
@@ -76,17 +85,29 @@ def main():
     settings_frame = tk.LabelFrame(root, bg="#d6d6d6")
 
     # Create app buttons
-    app_button_list = list()
+    app_frame_list = list()
     icon_list = list()
     for app in os.listdir(apps_directory):
+        # Create frame
+        app_frame = tk.LabelFrame(apps_frame, bg="white", borderwidth=0, highlightthickness=0)
+        # Create button
         icon = tk.PhotoImage(file=f"{apps_directory}/{app}/icon.png")
         icon_list.append(icon)
-        button = tk.Label(apps_frame, image=icon, bg="white")
-        app_button_list.append(button)
+        button = tk.Label(app_frame, image=icon, bg="white")
+        button.pack()
+        # Create label
+        label = tk.Label(app_frame, text=app, bg="white", font=("Arial", text_size))
+        label.pack()
+        # Making it clickable
+        bind_list = [app_frame, button, label]
+        for item in bind_list:
+            item.bind("<Button-1>", lambda event, app=app: open_app(app))
+        # Store frame
+        app_frame_list.append(app_frame)
 
     # Settings buttons
     settings_button = tk.Button(settings_frame, text="", bg="#d6d6d6", relief="flat", borderwidth=0, command=toggle_settings)
-    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updated_popup(root))
+    update_button = tk.Button(settings_frame, text="Check for Updates", bg="white", relief="flat", font=("Arial", text_size), command=lambda: updater_popup(root))
 
     # Create labels
     settings_label = tk.Label(settings_frame, text="Settings", font=("Arial", header_size))
@@ -94,8 +115,8 @@ def main():
     # Lay them out
     # Apps frame
     apps_frame.grid(row=0, column=1, sticky="snew")
-    for app_button in app_button_list:
-        app_button.pack(side="left", padx=20, pady=20, fill="x", expand=True)
+    for app_frame in app_frame_list:
+        app_frame.pack(side="left", padx=20, pady=20, fill="x", expand=True)
     # Settings frame
     settings_frame.grid(row=0, column=0, sticky="snew")
     settings_button.pack(side="right", fill="y")
