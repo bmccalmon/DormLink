@@ -88,7 +88,9 @@ def main():
     app_frame_list = list()
     icon_list = list()
     for app in os.listdir(apps_directory):
-        # Create frame
+        if app[0] == ".":
+            continue
+		# Create frame
         app_frame = tk.LabelFrame(apps_frame, bg="white", borderwidth=0, highlightthickness=0)
         # Create button
         icon = tk.PhotoImage(file=f"{apps_directory}/{app}/icon.png")
